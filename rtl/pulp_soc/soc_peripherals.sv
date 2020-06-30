@@ -93,14 +93,17 @@ module soc_peripherals #(
     output logic [3:0]                 timer_ch3_o,
 
     //CAMERA
+    /*
     input  logic                       cam_clk_i,
     input  logic [7:0]                 cam_data_i,
     input  logic                       cam_hsync_i,
     input  logic                       cam_vsync_i,
+    */
 
     //UART
     // output logic [N_UART-1:0]          uart_tx,
     // input  logic [N_UART-1:0]          uart_rx,
+    
     output logic           uart_tx,
     input  logic           uart_rx,
 
@@ -114,6 +117,7 @@ module soc_peripherals #(
     output logic [N_I2C-1:0]           i2c_sda_oe_o,
 
     //I2S
+    /*
     input  logic                       i2s_slave_sd0_i,
     input  logic                       i2s_slave_sd1_i,
     input  logic                       i2s_slave_ws_i,
@@ -122,6 +126,7 @@ module soc_peripherals #(
     input  logic                       i2s_slave_sck_i,
     output logic                       i2s_slave_sck_o,
     output logic                       i2s_slave_sck_oe,
+    */
 
     //SPI
     output logic [N_SPI-1:0]           spi_clk_o,
@@ -174,8 +179,8 @@ module soc_peripherals #(
     logic [1:0] s_spim_event      ;
     logic       s_uart_event      ;
     logic       s_i2c_event       ;
-    logic       s_i2s_event       ;
-    logic       s_i2s_cam_event   ;
+    //logic       s_i2s_event       ;
+    //logic       s_i2s_cam_event   ;
 
     logic [3:0] s_adv_timer_events;
     logic [1:0] s_fc_hp_events;
@@ -441,11 +446,12 @@ module soc_peripherals #(
         .sdio_data_i      ( sddata_i             ),
         .sdio_data_oen_o  ( sddata_oen_o         ),
 
-        .cam_clk_i        ( cam_clk_i            ),
+        /*.cam_clk_i        ( cam_clk_i            ),
         .cam_data_i       ( cam_data_i           ),
         .cam_hsync_i      ( cam_hsync_i          ),
         .cam_vsync_i      ( cam_vsync_i          ),
-
+        */
+        /*
         .i2s_slave_sd0_i  ( i2s_slave_sd0_i      ),
         .i2s_slave_sd1_i  ( i2s_slave_sd1_i      ),
         .i2s_slave_ws_i   ( i2s_slave_ws_i       ),
@@ -454,7 +460,7 @@ module soc_peripherals #(
         .i2s_slave_sck_i  ( i2s_slave_sck_i      ),
         .i2s_slave_sck_o  ( i2s_slave_sck_o      ),
         .i2s_slave_sck_oe ( i2s_slave_sck_oe     ),
-
+        */
         .uart_rx_i        ( uart_rx              ),
         .uart_tx_o        ( uart_tx              ),
 

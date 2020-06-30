@@ -74,10 +74,12 @@ module udma_subsystem
     output logic           [N_I2C-1:0] i2c_sda_o,
     output logic           [N_I2C-1:0] i2c_sda_oe,
 
+    /*
     input  logic                       cam_clk_i,
     input  logic  [CAM_DATA_WIDTH-1:0] cam_data_i,
     input  logic                       cam_hsync_i,
     input  logic                       cam_vsync_i,
+    */
 
     input  logic          [N_UART-1:0] uart_rx_i,
     output logic          [N_UART-1:0] uart_tx_o,
@@ -88,8 +90,9 @@ module udma_subsystem
     output logic                       sdio_cmd_oen_o,
     output logic                 [3:0] sdio_data_o,
     input  logic                 [3:0] sdio_data_i,
-    output logic                 [3:0] sdio_data_oen_o,
+    output logic                 [3:0] sdio_data_oen_o
 
+    /*
     input  logic                       i2s_slave_sd0_i,
     input  logic                       i2s_slave_sd1_i,
     input  logic                       i2s_slave_ws_i,
@@ -98,14 +101,16 @@ module udma_subsystem
     input  logic                       i2s_slave_sck_i,
     output logic                       i2s_slave_sck_o,
     output logic                       i2s_slave_sck_oe
+    */
+
 );
 
     localparam DEST_SIZE = 2;
 
     localparam L2_AWIDTH_NOAL = L2_ADDR_WIDTH + 2;
 
-    localparam N_I2S     = 1;
-    localparam N_CAM     = 1;
+    localparam N_I2S     = 0;
+    localparam N_CAM     = 0;
     localparam N_CSI2    = 0;
     localparam N_HYPER   = 0;
     localparam N_SDIO    = 1;
@@ -247,8 +252,8 @@ module udma_subsystem
 
     logic         [3:0] s_trigger_events;
 
-    logic s_cam_evt;
-    logic s_i2s_evt;
+    //logic s_cam_evt;
+    //logic s_i2s_evt;
     logic s_i2c1_evt;
 
     logic s_filter_eot_evt;
@@ -257,8 +262,8 @@ module udma_subsystem
 
     integer i;
 
-    assign s_cam_evt     = 1'b0;
-    assign s_i2s_evt     = 1'b0;
+    //assign s_cam_evt     = 1'b0;
+    //assign s_i2s_evt     = 1'b0;
     assign s_uart_evt    = 1'b0;
 
     assign events_o      = s_events;
@@ -717,6 +722,7 @@ module udma_subsystem
 
 
     //PER_ID 5
+    /*
     assign s_events[4*PER_ID_I2S]    = s_rx_ch_events[CH_ID_RX_I2S];
     assign s_events[4*PER_ID_I2S+1]  = s_tx_ch_events[CH_ID_TX_I2S];
     assign s_events[4*PER_ID_I2S+2]  = 1'b0;
@@ -793,8 +799,10 @@ module udma_subsystem
         .data_tx_valid_i     ( s_tx_ch_valid[CH_ID_TX_I2S]       ),
         .data_tx_ready_o     ( s_tx_ch_ready[CH_ID_TX_I2S]       )
     );
+    */
 
     //PER_ID 6
+    /*
     assign s_events[4*PER_ID_CAM]    = s_rx_ch_events[CH_ID_RX_CAM];
     assign s_events[4*PER_ID_CAM+1]  = 1'b0;
     assign s_events[4*PER_ID_CAM+2]  = 1'b0;
@@ -841,7 +849,7 @@ module udma_subsystem
         .cam_vsync_i         ( cam_vsync_i                     )
     );
     assign s_rx_ch_data[CH_ID_RX_CAM][31:16]='h0;
-
+    */
    //PER_ID 7
     assign s_events[4*PER_ID_FILTER]    = s_filter_eot_evt;
     assign s_events[4*PER_ID_FILTER+1]  = s_filter_act_evt;
